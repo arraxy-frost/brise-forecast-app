@@ -1,0 +1,38 @@
+# === GLOBAL ===
+node_modules/
+dist/
+.env
+.env.*.local
+*.log
+*.local
+.DS_Store
+Thumbs.db
+*.swp
+
+# === BACKEND (NestJS) ===
+/backend/node_modules/
+/backend/dist/
+/backend/.env
+/backend/.env.*.local
+/backend/*.log
+
+# === MOBILE APP (React Native + Expo) ===
+/mobile-app/node_modules/
+/mobile-app/.expo/
+/mobile-app/.expo-shared/
+/mobile-app/.env
+/mobile-app/*.log
+/mobile-app/android/
+/mobile-app/ios/
+/mobile-app/web-build/
+/mobile-app/build/
+/mobile-app/coverage/
+/mobile-app/fastlane/
+/mobile-app/dist/
+/mobile-app/metro-cache/
+/mobile-app/.gradle/
+/mobile-app/*.keystore
+
+# === macOS / OS-specific ===
+**/.DS_Store
+**/Thumbs.db
