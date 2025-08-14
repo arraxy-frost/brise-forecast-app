@@ -8,6 +8,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { User } from './enitites/user.entity';
 import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
+import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({})
 export class AppModule {
@@ -41,6 +43,12 @@ export class AppModule {
                 HttpModule
             ],
             controllers: [AppController],
+            providers: [
+                {
+                    provide: APP_GUARD,
+                    useClass: JwtAuthGuard,
+                },
+            ],
         };
     }
 }

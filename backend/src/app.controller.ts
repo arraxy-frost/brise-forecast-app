@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { HealthCheck, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
+import { Public } from './modules/auth/decorators/public.decorator';
 
 @Controller()
 export class AppController {
@@ -8,6 +9,7 @@ export class AppController {
         private readonly http: HttpHealthIndicator
     ) {}
 
+    @Public()
     @Get('health')
     @HealthCheck()
     check() {

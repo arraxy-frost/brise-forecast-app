@@ -5,10 +5,12 @@ import {
     NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { VaultClient } from './config/vault.client';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
     const vaultClient = new VaultClient();
     const secrets = await vaultClient.readSecrets();
+
 
     const PORT = secrets.SERVER_PORT || 8080;
 
@@ -17,9 +19,17 @@ async function bootstrap() {
         new FastifyAdapter(),
     );
     app.setGlobalPrefix('api');
+    app.useGlobalPipes(
+        new ValidationPipe({
+            whitelist: true,      // удаляет лишние поля
+            forbidNonWhitelisted: true, // выбрасывает ошибку на лишние поля
+            transform: true,      // автоматически преобразует типы
+        }),
+    );
 
     await app.listen(PORT, '0.0.0.0');
     console.log('Listening on port ' + PORT);
+    console.log('Loaded config:', secrets);
 }
 
 bootstrap();
