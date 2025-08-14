@@ -40,7 +40,7 @@ export class AppModule {
                 UsersModule,
                 AuthModule,
                 TerminusModule,
-                HttpModule
+                HttpModule,
             ],
             controllers: [AppController],
             providers: [
