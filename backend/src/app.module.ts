@@ -6,6 +6,8 @@ import { WeatherModule } from './modules/weather/weather.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { User } from './enitites/user.entity';
+import { TerminusModule } from '@nestjs/terminus';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({})
 export class AppModule {
@@ -34,7 +36,9 @@ export class AppModule {
                 }),
                 WeatherModule,
                 UsersModule,
-                AuthModule
+                AuthModule,
+                TerminusModule,
+                HttpModule
             ],
             controllers: [AppController],
         };
