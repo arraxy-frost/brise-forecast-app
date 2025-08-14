@@ -4,18 +4,22 @@ import {
     FastifyAdapter,
     NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import * as process from 'node:process';
+import { VaultClient } from './config/vault.client';
 
 async function bootstrap() {
-    const PORT = process.env.PORT || 8080;
+    const vaultClient = new VaultClient();
+    const secrets = await vaultClient.readSecrets();
+
+    const PORT = secrets.SERVER_PORT || 8080;
 
     const app = await NestFactory.create<NestFastifyApplication>(
-        AppModule,
+        AppModule.forRoot(secrets),
         new FastifyAdapter(),
     );
     app.setGlobalPrefix('api');
 
     await app.listen(PORT, '0.0.0.0');
+    console.log('Listening on port ' + PORT);
 }
 
 bootstrap();
