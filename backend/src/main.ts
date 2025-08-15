@@ -11,7 +11,6 @@ async function bootstrap() {
     const vaultClient = new VaultClient();
     const secrets = await vaultClient.readSecrets();
 
-
     const PORT = secrets.SERVER_PORT || 8080;
 
     const app = await NestFactory.create<NestFastifyApplication>(
@@ -21,15 +20,14 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.useGlobalPipes(
         new ValidationPipe({
-            whitelist: true,      // удаляет лишние поля
-            forbidNonWhitelisted: true, // выбрасывает ошибку на лишние поля
-            transform: true,      // автоматически преобразует типы
+            whitelist: true,
+            forbidNonWhitelisted: true,
+            transform: true,
         }),
     );
 
     await app.listen(PORT, '0.0.0.0');
     console.log('Listening on port ' + PORT);
-    console.log('Loaded config:', secrets);
 }
 
 bootstrap();

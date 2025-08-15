@@ -16,7 +16,6 @@ export class WeatherService {
 
     constructor(private readonly configService: ConfigService) {
         this.API_KEY = this.configService.get<string>('WEATHER_API_KEY');
-        console.log('WEATHER_API_KEY', this.API_KEY);
     }
 
     private getCacheKey(prefix: string, params: string) {

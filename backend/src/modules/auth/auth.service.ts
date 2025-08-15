@@ -9,7 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    private BCRYPT_SALT_ROUNDS: number;
+    private readonly BCRYPT_SALT_ROUNDS: number;
     private readonly logger = new Logger('AuthService');
 
     constructor(
@@ -18,7 +18,6 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {
         this.BCRYPT_SALT_ROUNDS = this.configService.get<number>('BCRYPT_SALT_ROUNDS') ?? 10;
-        console.log(this.BCRYPT_SALT_ROUNDS)
     }
 
     private async hashPassword(password: string): Promise<string> {
